@@ -5,9 +5,10 @@ namespace MeuBanco
     class ContaCorrente
     {
         private string _nome;
+        private string _agencia;
         private int _numero_conta;
 
-        public String Nome
+        public string Nome
         {
             set
             {
@@ -20,6 +21,8 @@ namespace MeuBanco
             }
         }
 
+        public string Agencia { set; get; }
+
         public int Numero
         {
             set
@@ -30,6 +33,24 @@ namespace MeuBanco
             {
                 return _numero_conta;
             }
+        }
+
+        public double Saldo { private set; get; }
+
+        public void Depositar(double valor)
+        {
+            if(valor > 0)
+                Saldo += valor;
+        }
+
+        public bool Sacar(double valor)
+        {
+            if(valor>0 && Saldo>=valor)
+            {
+                Saldo -= valor;
+                return true;
+            }
+            return false;
         }
     }
 }
