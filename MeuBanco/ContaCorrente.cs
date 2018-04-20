@@ -1,27 +1,26 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace MeuBanco
 {
+
+
+    class Transacao
+    {
+        public DateTime Data { get; set; }
+        public double Valor { get; set; }
+    }
+
+
     class ContaCorrente
     {
-        private string _nome;
-        private string _agencia;
         private int _numero_conta;
-
-        public string Nome
-        {
-            set
-            {
-                if(value != string.Empty)
-                    _nome = value;
-            }
-            get
-            {
-                return _nome;
-            }
-        }
-
-        public string Agencia { set; get; }
+        private List<Transacao> _transacoes = new List<Transacao>();
+        public string Agencia { get; set; }
+        public string Gerente { get; set; }
+        public Cliente Titular { get; set; }
 
         public int Numero
         {
@@ -35,22 +34,42 @@ namespace MeuBanco
             }
         }
 
-        public double Saldo { private set; get; }
+        public double Saldo
+        {
+            get
+            {
+                return _transacoes.Sum(tr => tr.Valor);
+            }
+        }
 
-        public void Depositar(double valor)
+        public bool Depositar(double valor)
         {
             if(valor > 0)
-                Saldo += valor;
+            {
+                _transacoes.Add(new Transacao { Valor = valor, Data = DateTime.Now });
+                return true;
+            }
+            return false;
         }
 
         public bool Sacar(double valor)
         {
-            if(valor>0 && Saldo>=valor)
+            if(valor > 0 && Saldo >= valor)
             {
-                Saldo -= valor;
+                _transacoes.Add(new Transacao { Valor = -valor, Data = DateTime.Now });
                 return true;
             }
             return false;
+        }
+
+        public string EmitirExtrato()
+        {
+            string extrato = string.Empty;
+            foreach (var transacao in _transacoes)
+            {
+                extrato += "\n" + transacao.Data + "\t" + transacao.Valor;
+            }
+            return extrato + "\n\nSALDO DESTE PERÍODO = R$ " + Saldo;
         }
     }
 }
