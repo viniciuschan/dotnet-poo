@@ -9,17 +9,17 @@ namespace JogoDamas
     public class Movimento
     {
         public int numero { get; set; }
-        public int xi { get; set; }
-        public int yi { get; set; }
-        public int xn { get; set; }
-        public int yn { get; set; }
+        public int ini_x { get; set; }
+        public int ini_y { get; set; }
+        public int fim_x { get; set; }
+        public int fim_y { get; set; }
 
         public Movimento(int a, int b, int c, int d, int numero)
         {
-            xi = a;
-            yi = b;
-            xn = c;
-            yn = d;
+            ini_x = a;
+            ini_y = b;
+            fim_x = c;
+            fim_y = d;
             numero = 0;
         }
     }
