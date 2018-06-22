@@ -22,7 +22,6 @@ namespace JogoDamas
                 P.Add(new Peca(1, 2*i + 1, 1));
                 P.Add(new Peca(1, 2*i, 2));
             }
-
             //Jogador 2
             for(int i = 0; i < 4; i++)
             {
@@ -54,7 +53,7 @@ namespace JogoDamas
         public void exibirTabuleiro()
         {
             string val = "";
-            val += "   _________________\n";
+            val += "   -----------------\n";
 
             for (int i = 0; i < 8; i++)
             {
@@ -72,7 +71,7 @@ namespace JogoDamas
                     val += "|\n";
                 }
             }
-            val += "  |_________________|\n\n    0 1 2 3 4 5 6 7\n";
+            val += "   -----------------\n    0 1 2 3 4 5 6 7\n";
             Console.WriteLine(val);
         }
 
@@ -89,15 +88,15 @@ namespace JogoDamas
             {
                 valor += "\n";
             }
+            Console.WriteLine("Escolha uma jogada abaixo e pressione enter:");
             return valor;
+
         }
 
         public List<Movimento> verificarMovimento(int jogador) {
-
             List<Movimento> movimentos = new List<Movimento>();
             IEnumerable<Peca> p;
             if (jogador == 1) {
-                
                 //Move peças para lado direito
                 p =
                     (from peca in P
@@ -109,7 +108,6 @@ namespace JogoDamas
                     foreach (Peca pi in p)
                         movimentos.Add(new Movimento(pi.pos_x, pi.pos_y, pi.pos_x + 2, pi.pos_y + 2, 1));
                 }
-
                 //Move peças para lado esquerdo
                 p =
                     (from peca in P
@@ -121,7 +119,6 @@ namespace JogoDamas
                     foreach (Peca pi in p)
                         movimentos.Add(new Movimento(pi.pos_x, pi.pos_y, pi.pos_x - 2, pi.pos_y + 2, 1));
                 }
-
                 //Move damas para lado direito
                 p =
                 (from peca in P
@@ -194,16 +191,12 @@ namespace JogoDamas
                     foreach (Peca pi in p)
                         movimentos.Add(new Movimento(pi.pos_x, pi.pos_y, pi.pos_x - 2, pi.pos_y + 2, 2));
                 }
-
-
             }
-
             movimentos = movimentos.OrderBy(x=> x.ini_x).ToList();
             return movimentos;
         }
 
         public List<Movimento> verificarMovimentoValido(int jogador) {
-
             //Encontra uma lista de movimentos válidos para cada jogador
             List<Movimento> movimentos = new List<Movimento>();
 
@@ -251,7 +244,6 @@ namespace JogoDamas
                     foreach (Peca pi in p)
                         movimentos.Add(new Movimento(pi.pos_x, pi.pos_y, pi.pos_x - 1, pi.pos_y - 1, 1));
                 }
-
             }
             else {
                 p =
@@ -312,7 +304,6 @@ namespace JogoDamas
 
             p.pos_x = m.fim_x;
             p.pos_y = m.fim_y;
-
         }
 
         public void removerPeca(int x, int y) {
@@ -329,6 +320,5 @@ namespace JogoDamas
             }
             this.P.Remove(p);
         }
-
     }
 }

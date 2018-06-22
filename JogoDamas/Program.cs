@@ -11,7 +11,7 @@ namespace JogoDamas
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Bora jogar Damas ihull o/");
+            Console.WriteLine("Bora jogar Damas ihull o/\n");
             Jogo damas = new Jogo();
             damas.comecarJogo();
         }

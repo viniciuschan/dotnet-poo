@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace JogoDamas
 {
     public class Jogo
@@ -65,7 +66,8 @@ namespace JogoDamas
                 entrada = Console.ReadLine();
                 while (true)
                 {
-                    if (!int.TryParse(entrada, out valor)) {
+                    if (!int.TryParse(entrada, out valor))
+                    {
                         Console.WriteLine("Escolha um movimento válido");
                         entrada = Console.ReadLine();
                     }
@@ -73,7 +75,8 @@ namespace JogoDamas
                     {
                         break;
                     }
-                    else {
+                    else
+                    {
                         Console.WriteLine("Escolha um movimento válido");
                         entrada = Console.ReadLine();
                     }
@@ -91,7 +94,6 @@ namespace JogoDamas
                          select peca).SingleOrDefault();
                     p.pecaDama = true;
                 }
-
                 if (Math.Abs(m.fim_x - m.ini_x) > 1)
                 {
                     tab.removerPeca((m.fim_x + m.ini_x)/2, (m.fim_y + m.ini_y)/2);
@@ -105,7 +107,6 @@ namespace JogoDamas
                     this.jogada = 1;
                 }
             }
-
             Console.WriteLine("Time " + this.jogada + " ganhou!");
             Console.Read();
         }
